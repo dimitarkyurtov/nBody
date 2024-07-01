@@ -278,14 +278,14 @@ int main(int argc, char *argv[])
 
 	
 	int start = -10000, end = 10000;
-	int interval = (end - start) / (config.numberOfThreads * 2);
-	for (int i = 0; i < config.numberOfThreads; i++)
-	{
-		unifs[i] = std::uniform_real_distribution<double>(start + 2*i*interval, start + interval + 2*i*interval);
-	}
+	// int interval = (end - start) / (config.numberOfThreads * 2);
+	// for (int i = 0; i < config.numberOfThreads; i++)
+	// {
+	// 	unifs[i] = std::uniform_real_distribution<double>(start + 2*i*interval, start + interval + 2*i*interval);
+	// }
 
-	//unifs[0] = std::uniform_real_distribution<double>(-30, 30);
-	//unifsVel[0] = std::uniform_real_distribution<double>(0, 0);
+	unifs[0] = std::uniform_real_distribution<double>(start, end);
+	unifsVel[0] = std::uniform_real_distribution<double>(-100, 100);
 	std::default_random_engine re;
 
 
@@ -309,8 +309,8 @@ int main(int argc, char *argv[])
 			std::vector<double> v1, v2;
 			for (size_t k = 0; k < numberOfDimensions; k++)
 			{
-				v1.push_back(unifs[i](re));
-				v2.push_back(0);
+				v1.push_back(unifs[0](re));
+				v2.push_back(unifsVel[0](re));
 			}
 
 			initialPositions[i].push_back(v1);
