@@ -260,15 +260,15 @@ int main(int argc, char *argv[])
 	}
 	if(argc >= 7)
 	{
-		config.dt = std::atoi(argv[6]);
+		config.dt = std::stod(argv[6]);
 	}
 	if(argc >= 8)
 	{
-		Config::softening = std::atoi(argv[7]);
+		Config::softening = std::stod(argv[7]);
 	}
 	if(argc >= 9)
 	{
-		Config::G = std::atoi(argv[8]);
+		Config::G = std::stod(argv[8]);
 	}
 
 	outputFile.open(config.ouputFileName);
@@ -277,7 +277,7 @@ int main(int argc, char *argv[])
 	outputFile << config.numberOfBodies << "," << config.numberOfBodies << "," << config.dt << "\n";
 
 	
-	int start = -1000, end = 1000;
+	int start = -10000, end = 10000;
 	int interval = (end - start) / (config.numberOfThreads * 2);
 	for (int i = 0; i < config.numberOfThreads; i++)
 	{

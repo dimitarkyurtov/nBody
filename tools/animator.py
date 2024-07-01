@@ -1,10 +1,17 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import pandas as pd
+import sys
 import re
 
+fileName = "nBody.txt"
 # Read the file
-with open('nBody.txt', 'r') as f:
+if (len(sys. argv) >= 1):
+    fileName = sys.argv[1]
+
+print(sys.argv[1])     
+
+with open(fileName, 'r') as f:
     lines = f.readlines()
 
 # Get the range from the first line
@@ -13,8 +20,8 @@ print(x_range)
 
 # Initialize the figure and axes
 fig, ax = plt.subplots()
-ax.set_xlim([-1000, 1000])
-ax.set_ylim([-1000, 1000])
+ax.set_xlim([-10000, 10000])
+ax.set_ylim([-10000, 10000])
 
 # Function to parse a line into time and points
 def parse_line(line):
@@ -35,6 +42,6 @@ scat = ax.scatter([], [])
 
 # Create the animation
 ani = animation.FuncAnimation(fig, update, frames=range(1, len(lines)), fargs=(lines, scat),
-                              interval=1000*x_range[2], blit=True)
+                              interval=1, blit=True)
 
 plt.show()
